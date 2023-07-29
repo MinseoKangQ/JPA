@@ -1,7 +1,6 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.List;
 
 public class JpaMain {
 
@@ -14,7 +13,6 @@ public class JpaMain {
 
 
         try {
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
