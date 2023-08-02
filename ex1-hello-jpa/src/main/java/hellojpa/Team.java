@@ -14,7 +14,7 @@ public class Team {
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name = "MEMBER_ID")
     private List<Member> members = new ArrayList<>();
 
     public Team() {
