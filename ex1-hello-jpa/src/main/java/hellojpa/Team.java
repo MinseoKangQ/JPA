@@ -13,8 +13,8 @@ public class Team extends BaseEntity {
 
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "MEMBER_ID")
+    @OneToMany(mappedBy = "id")
+//    @JoinColumn(name = "MEMBER_ID")
     private List<Member> members = new ArrayList<>();
 
     public Team() {
