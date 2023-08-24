@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -15,18 +16,26 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin(); // 트랜잭션 시작
 
-
         try {
 
-            Address address = new Address("city", "street", "100");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(new Address("homeCity", "street", "10000"));
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setHomeAddress(address);
-            em.persist(member1);
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
 
-            Address newAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
-            member1.setHomeAddress(newAddress);
+            member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
+            member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            System.out.println("=====================");
+            Member findMember = em.find(Member.class, member.getId());
 
             tx.commit();
 
