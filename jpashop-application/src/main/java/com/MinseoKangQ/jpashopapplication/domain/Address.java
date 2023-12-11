@@ -6,6 +6,7 @@ import lombok.Getter;
 @Embeddable
 @Getter // 값 타입은 값 변경을 불가능하게 하기 위해 @Setter 는 제거
 public class Address { // 내장 타입
+
     private String city;
     private String street;
     private String zipcode;
