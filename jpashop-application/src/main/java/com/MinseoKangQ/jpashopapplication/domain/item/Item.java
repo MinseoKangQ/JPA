@@ -1,6 +1,7 @@
 package com.MinseoKangQ.jpashopapplication.domain.item;
 
 import com.MinseoKangQ.jpashopapplication.domain.Category;
+import com.MinseoKangQ.jpashopapplication.exception.NotEnoughStockException;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -31,5 +32,27 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    /*
+    setter 로 변경하기 보다 핵심 비즈니스 로직을 이용해서 값 변경하기
+     */
+
+    /*
+    * 재고 증가
+    * */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /*
+    * 재고 감소
+    * */
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 
 }
