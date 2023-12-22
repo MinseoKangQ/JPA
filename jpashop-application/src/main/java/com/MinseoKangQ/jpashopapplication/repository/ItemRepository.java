@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class ItemRepository {
 
-    @PersistenceContext
+//    @PersistenceContext
     private final EntityManager em;
 
     public void save(Item item) {
