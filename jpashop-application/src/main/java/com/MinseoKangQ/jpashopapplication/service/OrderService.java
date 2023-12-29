@@ -8,6 +8,7 @@ import com.MinseoKangQ.jpashopapplication.domain.item.Item;
 import com.MinseoKangQ.jpashopapplication.repository.ItemRepository;
 import com.MinseoKangQ.jpashopapplication.repository.MemberRepository;
 import com.MinseoKangQ.jpashopapplication.repository.OrderRepository;
+import com.MinseoKangQ.jpashopapplication.repository.OrderSearch;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -64,8 +65,8 @@ public class OrderService {
     /**
      * 검색
      */
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        return orderRepository.findAll(orderSearch);
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 
 }
