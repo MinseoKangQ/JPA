@@ -16,7 +16,7 @@ public class ItemRepository {
 
     public void save(Item item) {
         if (item.getId() == null) { // id 값이 없다는 것은, 새로 생성한 객체임을 의미함
-            em.persist(em);
+            em.persist(item);
         } else {
             em.merge(item); // merge 는 update 와 유사함
         }
