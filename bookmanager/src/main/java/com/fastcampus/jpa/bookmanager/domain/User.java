@@ -1,19 +1,36 @@
 package com.fastcampus.jpa.bookmanager.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
+@Entity
+@Table(name = "Users")
+@ToString
 public class User {
-    @NonNull
+
+    @Id @GeneratedValue
+    private Long id;
+
     private String name;
-    @NonNull
+
     private String email;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 }
