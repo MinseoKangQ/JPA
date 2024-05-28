@@ -1,6 +1,7 @@
 package study.datajpa.repository;
 
 import java.util.Arrays;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -151,6 +152,36 @@ class MemberRepositoryTest {
         for (Member member : result) {
             System.out.println("member = " + member);
         }
+    }
+
+    @Test
+    public void returnType() {
+
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<Member> collectionA = memberRepository.findListByUsername("AAA");
+        Member memberA = memberRepository.findMemberByUsername("AAA");
+        Optional<Member> optionalA = memberRepository.findOptionalByUsername("AAA");
+
+        // 반환값이 List<Member>
+        // 값이 존재하지 않으면 null이 아니라 빈 컬렉션이 반환됨
+        List<Member> result = memberRepository.findListByUsername("akjdkfsdkjf");
+        System.out.println("result = " + result);
+
+        // 반환값이 Member
+        // 값이 존재하지 않으면 null 반환
+        Member member = memberRepository.findMemberByUsername("aksdjfkjd");
+        System.out.println("findMember = " + member);
+
+        // 반환값이 Optional<Member>
+        // 값이 존재하지 않으면 Optional.empty 반환
+        // 데이터 조회했는데 값이 있을 수도 있고 없을 수도 있다? -> Optional 쓰자
+        Optional<Member> optionalMember = memberRepository.findOptionalByUsername("adkfjskdjf");
+        System.out.println("optionalMember = " + optionalMember);
+
     }
 
 }
